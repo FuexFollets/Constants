@@ -24,6 +24,8 @@ CPP_FILES := $(filter-out $(MAIN_FILE), \
 			 $(shell find $(SOURCE_DIRECTORY) -name "*.cc"))
 HEADER_FILES := $(shell find $(SOURCE_DIRECTORY) -name "*.hpp") \
 				$(shell find $(SOURCE_DIRECTORY) -name "*.h")
+				$(shell find $(SOURCE_DIRECTORY) -name "*.h++")
+				$(shell find $(SOURCE_DIRECTORY) -name "*.hh")
 SOURCE_FILES := $(HEADER_FILES) $(CPP_FILES)
 OBJECT_FILES := $(patsubst $(SOURCE_DIRECTORY)/%.cpp, $(TARGET_DIRECTORY)/objects/%.o, $(CPP_FILES))
 
