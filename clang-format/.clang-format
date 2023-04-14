@@ -1,24 +1,24 @@
-IndentWidth: 4
-
-Language: Cpp
+---
 ColumnLimit: 100
-IndentWidth: 4
 TabWidth: 4
-AccessModifierOffset: 4
+IndentWidth: 4
+---
+Language: Cpp
+# BasedOnStyle:  LLVM
+AccessModifierOffset: 0
 AlignAfterOpenBracket: true
-AlignArrayOfStructures: Right
 AlignArrayOfStructures: Left
 AlignConsecutiveAssignments:
-    Enabled: false
-AlignConsecutiveMacros:
-    Enabled: false
+  Enabled: false
 AlignConsecutiveBitFields:
-    Enabled: false
+  Enabled: false
 AlignConsecutiveDeclarations:
-    Enabled: false
+  Enabled: false
+AlignConsecutiveMacros:
+  Enabled: false
 AlignEscapedNewlines: Left
 AlignOperands: Align
-AlignTrailingComments: Always
+AlignTrailingComments: true
 AllowAllArgumentsOnNextLine: true
 AllowAllParametersOfDeclarationOnNextLine: true
 AllowShortBlocksOnASingleLine: Empty
@@ -35,31 +35,28 @@ BinPackArguments: true
 BinPackParameters: true
 BitFieldColonSpacing: Both
 BraceWrapping:
-    AfterCaseLabel: false
-    AfterClass: false
-    AfterControlStatement: Never
-    AfterEnum: false
-    AfterFunction: false
-    AfterNamespace: false
-    AfterObjCDeclaration: true
-    AfterStruct: false
-    AfterUnion: false
-    AfterExternBlock: false
-    BeforeCatch: true
-    BeforeElse: true
-    BeforeLambdaBody: false
-    BeforeWhile: false
-    IndentBraces: false
-    SplitEmptyFunction: false
-    SplitEmptyRecord: false
-    SplitEmptyNamespace: false
-BreakAfterAttributes: Never
+  AfterCaseLabel: false
+  AfterClass: false
+  AfterControlStatement: Never
+  AfterEnum: false
+  AfterExternBlock: false
+  AfterFunction: false
+  AfterNamespace: false
+  AfterObjCDeclaration: true
+  AfterStruct: false
+  AfterUnion: false
+  BeforeCatch: true
+  BeforeElse: true
+  BeforeLambdaBody: false
+  BeforeWhile: false
+  IndentBraces: false
+  SplitEmptyFunction: false
+  SplitEmptyNamespace: false
+  SplitEmptyRecord: false
 BreakAfterJavaFieldAnnotations: true
-BreakArrays: false
 BreakBeforeBinaryOperators: None
-BreakBeforeBraces: Attach
-BreakBeforeConceptDeclarations: Allowed
-BreakBeforeInlineASMColon: OnlyMultiline
+BreakBeforeBraces: Custom
+BreakBeforeConceptDeclarations: Always
 BreakBeforeTernaryOperators: true
 BreakConstructorInitializers: AfterColon
 BreakInheritanceList: AfterComma
@@ -68,57 +65,50 @@ CompactNamespaces: true
 ConstructorInitializerIndentWidth: 4
 ContinuationIndentWidth: 4
 Cpp11BracedListStyle: true
-DerivePointerAlignment: true
+DeriveLineEnding: true
 EmptyLineAfterAccessModifier: Always
 EmptyLineBeforeAccessModifier: LogicalBlock
 FixNamespaceComments: true
-IndentAccessModifiers: true
+IndentAccessModifiers: false
 IndentCaseBlocks: false
 IndentCaseLabels: true
 IndentExternBlock: Indent
 IndentGotoLabels: false
-IndentPPDDirectives: BeforeHash
+IndentPPDirectives: None
 IndentRequiresClause: true
 IndentWrappedFunctionNames: true
-InsertNewlineAtEOF: true
 InsertTrailingCommas: None
-IntegerLiteralSeparator:
-    Binary: 8
-    Decimal: 3
-    Hex: 2
 KeepEmptyLinesAtTheStartOfBlocks: false
 LambdaBodyIndentation: Signature
-LineEnding: DeriveLF
 NamespaceIndentation: All
-PPIndentWidth: 1
 PackConstructorInitializers: BinPack
 PointerAlignment: Left
+PPIndentWidth: 1
 QualifierAlignment: Left
 ReferenceAlignment: Left
 ReflowComments: true
 RequiresClausePosition: SingleLine
-RequiresExpressionIndentation: OuterScope
 SeparateDefinitionBlocks: Always
 SortIncludes: CaseInsensitive
-SortUsingDeclarations: LexicographicNumeric
+SortUsingDeclarations: true
 SpaceAfterCStyleCast: true
 SpaceAfterLogicalNot: false
 SpaceAfterTemplateKeyword: true
 SpaceAroundPointerQualifiers: Before
 SpaceBeforeAssignmentOperators: true
-SpaceBeforeCseColon: false
-spaceBeforeCpp11BracedList: true
-SpaceBeforeInitializerColon: true
-SpcaeBeforeInheritanceColon: true
+SpaceBeforeCaseColon: false
+SpaceBeforeCpp11BracedList: true
+SpaceBeforeCtorInitializerColon: true
+SpaceBeforeInheritanceColon: true
 SpaceBeforeParens: Never
 SpaceBeforeRangeBasedForLoopColon: false
-SpaceBeforeSquaredBrackets: true 
+SpaceBeforeSquareBrackets: true 
 SpaceInEmptyBlock: false
-SpaceInEmtpyParenthesis: false
-SpacesInAngels: Never
-SpacesInCStyleCastParenthesis: false
-SpacesInConditionalstatement: false
+SpaceInEmptyParentheses: false
+SpacesInAngles: Never
+SpacesInConditionalStatement: false
 SpacesInContainerLiterals: false
-SpacesInParenthesis: false
+SpacesInCStyleCastParentheses: false
+SpacesInParentheses: false
 SpacesInSquareBrackets: false
-VerilogBreakBetweenInstancePorts: true
+...
