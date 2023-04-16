@@ -7,6 +7,8 @@ CXX_FLAGS := \
 			$(LIBRARY_INCLUDES) \
 			$(LXX_FLAGS)
 
+FORMATTER := clang-format
+
 SOURCE_DIRECTORY := ./src
 TARGET_DIRECTORY := ./dist
 
@@ -47,9 +49,12 @@ define MAIN_OBJECT_FILES
 $(call simplify_path,$(patsubst %_yes_main, %, $(filter %_yes_main,$(_UNMATCHED_OBJECT_FILES))))
 endef
 
-.PHONY: clean print dist_dirs all $(POSSIBLE_PROGRAM_NAMES)
+.PHONY: clean print dist_dirs all $(POSSIBLE_PROGRAM_NAMES) format
 
 all: $(OBJECT_FILES) | dist_dirs
+
+format:
+	$(FORMATTER) -i $(SOURCE_FILES)
 
 $(POSSIBLE_PROGRAM_NAMES): %: $(TARGET_DIRECTORY)/bin/% | dist_dirs
 
