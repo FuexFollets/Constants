@@ -12,6 +12,7 @@ TARGET_DIRECTORY := ./dist
 
 ##############################################################################
 
+NULLFILE := /dev/null
 CPP_FILES := $(shell find $(SOURCE_DIRECTORY) -name "*.cpp") \
 			 $(shell find $(SOURCE_DIRECTORY) -name "*.cxx") \
 			 $(shell find $(SOURCE_DIRECTORY) -name "*.cc")
@@ -31,7 +32,7 @@ $(patsubst ./%,%,$(subst /./,/,$(subst /./,/, $(patsubst %/,%, $(1)))))
 endef
 
 define OBJ_HAS_MAIN_FUNCTION_MATCHER # adds '_not_main' to the end of the object file name if it does not contain a main function
-$(shell nm $(1) 2> /dev/null | grep -E "[[:xdigit:]]\sT\smain" > /dev/null && echo "$(1)_yes_main" || echo "$(1)_not_main")
+$(shell nm $(1) 2> $(NULLFILE) | grep -E "[[:xdigit:]]\sT\smain" > $(NULLFILE) && echo "$(1)_yes_main" || echo "$(1)_not_main")
 endef
 
 define _UNMATCHED_OBJECT_FILES
