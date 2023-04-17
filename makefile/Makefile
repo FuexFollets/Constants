@@ -1,9 +1,10 @@
-LIBRARY_INCLUDES :=
+LIBRARY_INCLUDES := -I ./lib/argparse/include/ \
+					-I ./lib/tomlplusplus/include/
 
 LXX_FLAGS :=
 
 CXX := g++
-CXX_FLAGS := \
+CXX_FLAGS := -std=c++23 \
 			$(LIBRARY_INCLUDES) \
 			$(LXX_FLAGS)
 
@@ -15,14 +16,11 @@ TARGET_DIRECTORY := ./dist
 ##############################################################################
 
 NULLFILE := /dev/null
-CPP_FILES := $(shell find $(SOURCE_DIRECTORY) -name "*.cpp") \
-			 $(shell find $(SOURCE_DIRECTORY) -name "*.cxx") \
-			 $(shell find $(SOURCE_DIRECTORY) -name "*.cc")
-HEADER_FILES := $(shell find $(SOURCE_DIRECTORY) -name "*.hpp") \
-				$(shell find $(SOURCE_DIRECTORY) -name "*.h") \
-				$(shell find $(SOURCE_DIRECTORY) -name "*.h++") \
-				$(shell find $(SOURCE_DIRECTORY) -name "*.hh")
-SOURCE_FILES := $(HEADER_FILES) $(CPP_FILES)
+CPP_FILES := $(shell find $(SOURCE_DIRECTORY) -regextype egrep \
+			 -regex ".*\.(cc|cp|cxx|cpp|cPP|c\+\+|C)$$")
+CPP_HEADER_FILES := $(shell find $(SOURCE_DIRECTORY) -regextype egrep \
+				-regex ".*\.(hh|H|hp|hxx|hpp|HPP|h++|tcc)")
+SOURCE_FILES := $(CPP_HEADER_FILES) $(CPP_FILES)
 OBJECT_FILES := $(patsubst $(SOURCE_DIRECTORY)/%.cpp, $(TARGET_DIRECTORY)/objects/%.o, $(CPP_FILES))
 SOURCE_DIRECTORY_STRUCTURE := $(shell find $(SOURCE_DIRECTORY) -type d)
 DIST_DIRECTORY_STRUCTURE := $(patsubst $(SOURCE_DIRECTORY)/%, $(TARGET_DIRECTORY)/objects/%, $(filter-out $(SOURCE_DIRECTORY),$(SOURCE_DIRECTORY_STRUCTURE)))
@@ -61,12 +59,12 @@ $(POSSIBLE_PROGRAM_NAMES): %: $(TARGET_DIRECTORY)/bin/% | dist_dirs
 $(TARGET_DIRECTORY)/bin/%: $(TARGET_DIRECTORY)/objects/%.o $(OBJECT_FILES) | dist_dirs
 	$(CXX) $(CXX_FLAGS) $(NON_MAIN_OBJECT_FILES) $< -o $@
 
-$(TARGET_DIRECTORY)/objects/%.o: ./$(SOURCE_DIRECTORY)/%.cpp $(HEADER_FILES) | dist_dirs
+$(TARGET_DIRECTORY)/objects/%.o: ./$(SOURCE_DIRECTORY)/%.cpp $(CPP_HEADER_FILES) | dist_dirs
 	$(CXX) $(CXX_FLAGS) -c $< -o $@
 
 clean:
 	@[ -e $(TARGET_DIRECTORY) ] && rm -r $(TARGET_DIRECTORY) || :
-	@[ "$(shell find -type l)" == "./bin" ] && rm ./bin || :
+	@[ "$(shell find -type l -name 'bin')" == "./bin" ] && rm ./bin || :
 
 dist_dirs:
 	@mkdir -p $(TARGET_DIRECTORY)/objects
@@ -79,7 +77,7 @@ print: # Tests for wildcards
 	@echo "TARGET_DIRECTORY: $(TARGET_DIRECTORY)"
 
 	@echo "CPP_FILES: $(CPP_FILES)"
-	@echo "HEADER_FILES: $(HEADER_FILES)"
+	@echo "CPP_HEADER_FILES: $(CPP_HEADER_FILES)"
 	@echo "OBJECT_FILES: $(OBJECT_FILES)"
 	@echo "SOURCE_FILES: $(SOURCE_FILES)"
 	@echo "SOURCE_DIRECTORY_STRUCTURE: $(SOURCE_DIRECTORY_STRUCTURE)"
