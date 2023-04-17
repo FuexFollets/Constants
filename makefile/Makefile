@@ -23,9 +23,12 @@ CPP_HEADER_FILES := $(shell find $(SOURCE_DIRECTORY) -regextype egrep \
 SOURCE_FILES := $(CPP_HEADER_FILES) $(CPP_FILES)
 OBJECT_FILES := $(patsubst $(SOURCE_DIRECTORY)/%.cpp, $(TARGET_DIRECTORY)/objects/%.o, $(CPP_FILES))
 SOURCE_DIRECTORY_STRUCTURE := $(shell find $(SOURCE_DIRECTORY) -type d)
-DIST_DIRECTORY_STRUCTURE := $(patsubst $(SOURCE_DIRECTORY)/%, $(TARGET_DIRECTORY)/objects/%, $(filter-out $(SOURCE_DIRECTORY),$(SOURCE_DIRECTORY_STRUCTURE)))
-BIN_DIST_DIRECTORY_STRUCTURE := $(patsubst $(SOURCE_DIRECTORY)%, $(TARGET_DIRECTORY)/bin/%, $(filter-out $(SOURCE_DIRECTORY),$(SOURCE_DIRECTORY_STRUCTURE)))
-POSSIBLE_PROGRAM_NAMES := $(basename $(patsubst $(SOURCE_DIRECTORY)/%, %, $(filter-out $(SOURCE_DIRECTORY),$(CPP_FILES))))
+DIST_DIRECTORY_STRUCTURE := $(patsubst $(SOURCE_DIRECTORY)/%,$(TARGET_DIRECTORY)/objects/%, \
+								$(filter-out $(SOURCE_DIRECTORY),$(SOURCE_DIRECTORY_STRUCTURE)))
+BIN_DIST_DIRECTORY_STRUCTURE := $(patsubst $(SOURCE_DIRECTORY)%, $(TARGET_DIRECTORY)/bin/%, \
+									$(filter-out $(SOURCE_DIRECTORY),$(SOURCE_DIRECTORY_STRUCTURE)))
+POSSIBLE_PROGRAM_NAMES := $(basename $(patsubst $(SOURCE_DIRECTORY)/%, %, \
+						  $(filter-out $(SOURCE_DIRECTORY),$(CPP_FILES))))
 
 define simplify_path # removes './' from the beginning of the path and removes any '/./' from the path
 $(patsubst ./%,%,$(subst /./,/,$(subst /./,/, $(patsubst %/,%, $(1)))))
