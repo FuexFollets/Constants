@@ -77,9 +77,9 @@ clean:
 	@[ "$(shell find -type l -name 'bin')" == "./bin" ] && rm ./bin || :
 
 dist_dirs:
-	@mkdir -p $(TARGET_DIRECTORY)/objects || :
-	@mkdir -p $(TARGET_DIRECTORY)/bin/$(BIN_DIST_DIRECTORY_STRUCTURE) || :
-	@mkdir -p $(DIST_DIRECTORY_STRUCTURE) || :
+	@mkdir -p $(TARGET_DIRECTORY)/objects 2>> $(NULLFILE) || :
+	@mkdir -p $(TARGET_DIRECTORY)/bin/$(BIN_DIST_DIRECTORY_STRUCTURE) 2>> $(NULLFILE) || :
+	@mkdir -p $(DIST_DIRECTORY_STRUCTURE) 2>> $(NULLFILE) || :
 	@ln -fs $(TARGET_DIRECTORY)/bin . || :
 
 print: # Tests for wildcards
