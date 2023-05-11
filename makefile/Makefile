@@ -1,12 +1,19 @@
-LIBRARY_INCLUDES := -I ./lib/argparse/include/ \
-					-I ./lib/tomlplusplus/include/
+LIBRARY_INCLUDES :=
 
 LXX_FLAGS :=
 
+CXX_VERSION := -std=c++23
+CXX_WARNINGS := -Wshadow \
+			-Wall \
+			-Wextra \
+			-pedantic-errors \
+			-pedantic
+
 CXX := g++
-CXX_FLAGS := -std=c++23 \
-			$(LIBRARY_INCLUDES) \
-			$(LXX_FLAGS)
+CXX_FLAGS := $(CXX_VERSION) \
+			 $(CXX_WARNINGS) \
+			 $(LIBRARY_INCLUDES) \
+			 $(LXX_FLAGS)
 
 FORMATTER := clang-format
 
